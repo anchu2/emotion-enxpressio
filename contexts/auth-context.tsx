@@ -9,6 +9,7 @@ import {
   signInWithCustomToken,
   signOut as firebaseSignOut,
   onAuthStateChanged,
+  UserCredential,
 } from "firebase/auth"
 import { doc, setDoc, getDoc } from "firebase/firestore"
 import { auth, db } from "@/lib/firebase"
@@ -29,8 +30,8 @@ export interface ExtendedUser extends User {
 interface AuthContextType {
   user: ExtendedUser | null
   loading: boolean
-  signInWithGoogle: () => Promise<void>
-  signInWithKakao: () => Promise<void>
+  signInWithGoogle: () => Promise<UserCredential>
+  signInWithKakao: () => Promise<UserCredential>
   signOut: () => Promise<void>
   checkPremiumAccess: () => boolean
   authError: string | null
@@ -40,8 +41,12 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType>({
   user: null,
   loading: true,
-  signInWithGoogle: async () => {},
-  signInWithKakao: async () => {},
+  signInWithGoogle: async () => {
+    throw new Error("Not implemented")
+  },
+  signInWithKakao: async () => {
+    throw new Error("Not implemented")
+  },
   signOut: async () => {},
   checkPremiumAccess: () => false,
   authError: null,
